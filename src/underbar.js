@@ -1,4 +1,4 @@
-(function() {
+  (function() {
   'use strict';
 
   window._ = {};
@@ -51,6 +51,16 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    if (Array.isArray(collection)){
+      var u = collection.length-1;
+      for (var i =0; i <= collection.length-1; i++) {
+        iterator(collection[i], i, collection);
+      };
+    } else {
+      for (var k in collection) {
+        iterator(collection[k], k, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -72,17 +82,44 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var truth = [];
+    for (var i = 0; i <= collection.length-1; i++){
+      if (test(collection[i])) {
+        truth.push(collection[i]);
+      };
+    };
+    return truth;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var reject = [];
+    for (var i = 0; i <= collection.length-1; i++){
+      if (!test(collection[i])) {
+        reject.push(collection[i]);
+      };
+    };
+    return reject;    
+
+    //SAF - implement this version if you finish _.difference in EC
+    // var filter = _.filter(collection, test);
+    // var reject = _.difference(collection, filter); 
+    // return reject;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-  };
+    var uniq = [];
+    //check if array[i] is in uniq - if not, push - if so, roll on
+    for (var i = 0; i <= array.length-1; i++){
+      if (uniq.indexOf(array[i]) === -1){
+        uniq.push(array[i]);
+      };
+    };
+  return uniq;
+};
 
 
   // Return the results of applying an iterator to each element.
@@ -294,6 +331,8 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+
+
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
