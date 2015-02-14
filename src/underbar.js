@@ -110,16 +110,19 @@
   };
 
   // Produce a duplicate-free version of the array.
-//   _.uniq = function(array) {
-//     var uniq = [0];
-//     //check if array[i] is in uniq - if not, push - if so, roll on
-//     for (var i = 0; i <= array.length-1; i++){
-//       if (_.contains(uniq, array[i])){
-//         uniq.push(array[i]);    
-//       };
-//     };
-//   return uniq;
-// };
+  _.uniq = function(array) {
+    var uniq = [];
+    var element, check = 0;
+    //check if array[i] is in uniq - if not, push - if so, roll on
+    for (var i = 0; i <= array.length-1; i++){
+      element = parseInt(array[i]);
+      check = _.indexOf(uniq, element);
+      if (check === -1){
+        uniq.push(element);    
+      };
+    };
+  return uniq;
+};
 
 
   // Return the results of applying an iterator to each element.
