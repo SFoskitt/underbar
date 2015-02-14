@@ -110,16 +110,16 @@
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array) {
-    var uniq = [];
-    //check if array[i] is in uniq - if not, push - if so, roll on
-    for (var i = 0; i <= array.length-1; i++){
-      if (uniq.indexOf(array[i]) === -1){
-        uniq.push(array[i]);
-      };
-    };
-  return uniq;
-};
+//   _.uniq = function(array) {
+//     var uniq = [0];
+//     //check if array[i] is in uniq - if not, push - if so, roll on
+//     for (var i = 0; i <= array.length-1; i++){
+//       if (_.contains(uniq, array[i])){
+//         uniq.push(array[i]);    
+//       };
+//     };
+//   return uniq;
+// };
 
 
   // Return the results of applying an iterator to each element.
@@ -168,6 +168,8 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    accumulator += _.each(collection, iterator);
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
