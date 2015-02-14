@@ -52,7 +52,6 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     if (Array.isArray(collection)){
-      var u = collection.length-1;
       for (var i =0; i <= collection.length-1; i++) {
         iterator(collection[i], i, collection);
       };
@@ -174,7 +173,17 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    accumulator = accumulator + _.each(collection, iterator);
+    if (arguments.length > 2){
+      for (var i = 0; i <= collection.length-1; i++){
+        accumulator = iterator(accumulator, collection[i]);        
+      };
+    }
+    else {
+      var accumulator = collection[0];
+      for (var i = 1; i <= collection.length-1; i++){
+        accumulator = iterator(accumulator, collection[i]);
+      };
+    };
     return accumulator;
   };
 
