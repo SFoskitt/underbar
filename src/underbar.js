@@ -304,6 +304,9 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments);
+    args.splice(0,2);
+    setTimeout(func(args), wait);
   };
 
 
@@ -318,6 +321,10 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var num = Math.floor((Math.random() * array.length) + 1);
+    var ran1 = array.slice(num);
+    var ran2 = array.slice(0,num); 
+    return ran1.concat(ran2);
   };
 
 
@@ -353,8 +360,12 @@
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
-  _.flatten = function(nestedArray, result) {
-  };
+  _.flatten = function(nestedArray) {
+    _.reduce(nestedArray, function(){
+      accumulator.push(collection[i]);
+      });
+      return accumulator;
+    };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
