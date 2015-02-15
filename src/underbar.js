@@ -126,7 +126,6 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
-    
     var results = [];
     for(var i = 0; i <=collection.length-1; i++){
       results.push(iterator(collection[i]));
@@ -199,7 +198,6 @@
     }, false);
   };
 
-
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.  //SAF - not sure how that would help
@@ -211,12 +209,13 @@
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here. //SAF - my brains are mush and I just can't see it
-    // iterator || (iterator = _.identity);
-    // for (var i = 0; i < collection.length -1; i++){
-    //   if (iterator())
-    // };
-    // return false;
+    iterator || (iterator = _.identity);
+    for (var i = 0; i <= collection.length; i++){
+      if (iterator(collection[i])){
+        return true;
+      };
+    };
+    return false;
   };
 
 
@@ -252,6 +251,17 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    // for (var i = 0; i <= arguments.length; i++){
+    //   for (var k in arguments[i]){
+    //     obj.
+    //   };    
+    // };
+
+    // var k = obj.length-1;
+    // while(k >= 0){
+
+    // };
+
   };
 
 
@@ -295,6 +305,16 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var alreadyCalcd = false;
+    var result;
+
+    return function() {
+      if (!alreadyCalcd){
+         result = func.apply(this, arguments);
+         alreadyCalcd = true;
+      }
+      return result;
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
