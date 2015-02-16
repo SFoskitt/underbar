@@ -69,7 +69,6 @@
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
     var result = -1;
-
     _.each(array, function(item, index) {
       if (item === target && result === -1) {
         result = index;
@@ -82,8 +81,9 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     var truth = [];
+	var i = 0;
     for (var i = 0; i <= collection.length-1; i++){
-      if (test(collection[i])) {
+		if (test(collection[i])) {
         truth.push(collection[i]);
       };
     };
@@ -190,31 +190,31 @@
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, function(wasFound, item) {
-      if (wasFound) {
-        return true;
-      }
-      return item === target;
-    }, false);
+    // return _.reduce(collection, function(wasFound, item) {
+      // if (wasFound) {
+        // return true;
+      // }
+      // return item === target;
+    // }, false);
   };
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    iterator || (iterator = _.identity);
-    var arr = _.filter(collection, iterator);
-    return arr.length === collection.length;
+    // iterator || (iterator = _.identity);
+    // var arr = _.filter(collection, iterator);
+    // return arr.length === collection.length;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
-    iterator || (iterator = _.identity);
-    for (var i = 0; i <= collection.length; i++){
-      if (iterator(collection[i])){
-        return true;
-      };
-    };
-    return false;
+    // iterator || (iterator = _.identity);
+    // for (var i = 0; i <= collection.length; i++){
+      // if (iterator(collection[i])){
+        // return true;
+      // };
+    // };
+    // return false;
   };
 
 
@@ -237,14 +237,14 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-        for (var i = 0; i <= arguments.length; i++) {
-            for (var key in arguments[i]) {
-                if (arguments[i].hasOwnProperty(key)) {
-                    obj[key] = arguments[i][key];
-                }
-            }
-        }
-     return obj;
+        // for (var i = 0; i <= arguments.length; i++) {
+            // for (var key in arguments[i]) {
+                // if (arguments[i].hasOwnProperty(key)) {
+                    // obj[key] = arguments[i][key];
+                // }
+            // }
+        // }
+     // return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
@@ -304,16 +304,16 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var alreadyCalcd = false;
-    var result;
+    // var alreadyCalcd = false;
+    // var result;
 
-    return function() {
-      if (!alreadyCalcd){
-         result = func.apply(this, arguments);
-         alreadyCalcd = true;
-      }
-      return result;
-    };
+    // return function() {
+      // if (!alreadyCalcd){
+         // result = func.apply(this, arguments);
+         // alreadyCalcd = true;
+      // }
+      // return result;
+    // };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -323,9 +323,9 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
-    var args = Array.prototype.slice.call(arguments);
-    args.splice(0,2);
-    setTimeout(func(args), wait);
+    // var args = Array.prototype.slice.call(arguments);
+    // args.splice(0,2);
+    // setTimeout(func(args), wait);
   };
 
 
@@ -340,10 +340,10 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-    var num = Math.floor((Math.random() * array.length) + 1);
-    var ran1 = array.slice(num);
-    var ran2 = array.slice(0,num); 
-    return ran1.concat(ran2);
+    // var num = Math.floor((Math.random() * array.length) + 1);
+    // var ran1 = array.slice(num);
+    // var ran2 = array.slice(0,num); 
+    // return ran1.concat(ran2);
   };
 
 
