@@ -200,7 +200,6 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.  //SAF - not sure how that would help
     iterator || (iterator = _.identity);
     var arr = _.filter(collection, iterator);
     return arr.length === collection.length;
@@ -381,15 +380,24 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray) {
-    _.reduce(nestedArray, function(){
-      accumulator.push(collection[i]);
-      });
-      return accumulator;
+    // _.reduce(nestedArray, function(){
+    //   accumulator.push(collection[i]);
+    //   });
+    //   return accumulator;
     };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+
+    // var result = arguments[0];
+    // for (var i = 1; i <= arguments.length-1; i++){
+    //   for (var j = 0; j <= arguments.length-1; j++) {
+    //     var yes = 0;
+    //     if (arguments[0][i] === arguments[i][j]) {yes++};
+    //   }
+
+    // };
   };
 
   // Take the difference between one array and a number of other arrays.
