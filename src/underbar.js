@@ -325,9 +325,10 @@
   _.delay = function(func, wait) {
     var args = Array.prototype.slice.call(arguments);
     args.splice(0,2);
-    window.setTimeout(func, wait, arguments);
-  };
-
+    return setTimeout(function(){
+		return func.apply(null,args);
+		}, wait);
+	};
 
   /**
    * ADVANCED COLLECTION OPERATIONS
