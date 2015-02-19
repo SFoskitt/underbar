@@ -199,6 +199,14 @@
 	}, false);
   };
 
+     // return _.reduce(collection, function(wasFound, item) {
+       // if (wasFound) {
+         // return true;
+       // }
+       // return item === target;
+     // }, false);
+   // };	
+	
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     iterator || (iterator = _.identity);
@@ -238,28 +246,30 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-        for (var i = 0; i <= arguments.length-1; i++) {
-            for (var key in arguments[i]) {
-                if (arguments[i].hasOwnProperty(key)) {
-                    obj[key] = arguments[i][key];
-                }
-            }
-        }
-     return obj;
-  };
+		for (var i = 0; i <= arguments.length-1; i++) {
+			for (var key in arguments[i]) {
+				if (arguments[i].hasOwnProperty(key)) {
+					obj[key] = arguments[i][key];
+				}
+			}
+		}
+		return obj;
+	};
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-	var args = arguments;
-	var retObj = {};
-    for (var i = 0; i <= arguments.length-1; i++){
-      for (var key in arguments[i]){
-		  if(!retObj[key]){retObj[key] = arguments[i][key]};
-      };    
-    };
-	return retObj;
-  };
+		for (var i = 1; i < arguments.length; i++) {
+			var tmp = arguments[i];
+			for (var k in tmp) {
+				if (!obj.hasOwnProperty(k)) {
+					obj[k] = tmp[k];
+				}
+			}
+		}
+		return obj;
+	};
+
 
 
   /**
@@ -302,19 +312,20 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-	var alreadyCalcd = false;
-	var args;
-    var result;
-
-    return function() {
-      if (!alreadyCalcd && !(args === func.arguments)){
-         result = func.apply(this, arguments);
-         alreadyCalcd = true;
-		 args = func.arguments;
-      }
-      return result;
-    };
-  };
+	var alreadyCalcd = [];
+	return function() {
+		var args = Array.prototype.slice.call(arguments);
+		var ans;
+		if (alreadyCalcd[args]){
+			return alreadyCalcd[args];
+		}
+		else {
+			ans = func.apply(this, arguments);
+			alreadyCalcd[args] = ans;
+			return ans;
+		};
+	};
+ };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
@@ -344,12 +355,12 @@
     var num = Math.floor((Math.random() * (array.length-1)))+1;
     var ran1 = array.slice(num);
     var ran2 = array.slice(0,num); 
-	var ran3 = ran1.concat(ran2);
-	var yes = 0;
-	for(var i = 0; i<=array.length-1; i++){
-		if(array[i] === ran3[i]){yes=yes+1;};
-	};
-	if(yes === ran3.length){_.shuffle(array)} else{return ran3};
+		var ran3 = ran1.concat(ran2);
+		var yes = 0;
+		for(var i = 0; i<=array.length-1; i++){
+			if(array[i] === ran3[i]){yes=yes+1;};
+		};
+		if(yes === ran3.length){_.shuffle(array)} else{return ran3};
   };
 
 
@@ -379,15 +390,7 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function(array) {
-	  // var a = array.arguments
-	  // var b = a[0];
-	  // var e = arguments.length;
-	  // var c = b.length;
-	  // var d = arguments
-	  //arguments.length is number of arrays to zip
-	  //arguments.legnth[0] is first array 
-	  //arguments.length[0].length-1 is number of elements in first array
-	  //arguments.length[
+	
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
